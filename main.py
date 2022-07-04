@@ -8,26 +8,31 @@ nltk.download('stopwords')
 nltk_stopwords = nltk.corpus.stopwords.words('english')
 from nltk.tokenize import word_tokenize
 from textblob import TextBlob
-response = requests.get("https://www.coursera.org/learn/python/reviews")
-soup = BeautifulSoup(response.text, "html.parser")
-
-results = soup.find_all("div", class_="rc-CML font-lg show-soft-breaks cml-cui")
-
 result_list = []
+for page in range(1,4): #hetch page1 to 3
+    response = requests.get("https://www.coursera.org/learn/python/reviews?page="+str(page))
+
+    soup = BeautifulSoup(response.text, "html.parser")
+
+    results = soup.find_all("div", class_="rc-CML font-lg show-soft-breaks cml-cui")
+    #print(results)
+    
+
+#stpwd_arr = []
+
+    for result in results: #extraction
+        #result = str(result)
+        #word_tokenize(result)
+        result_list.append(result.getText())
+    #print(result_list)
 arr = []
-stpwd_arr = []
 pos = []
 neg = []
-for result in results:
-    #result = str(result)
-    #word_tokenize(result)
-    result_list.append(result.getText())
-
-for ite in range(len(result_list)):
+for ite in range(len(result_list)): #tokenization
     arr.append(word_tokenize(result_list[ite]))
 #print(arr)
 
-for n in range(len(arr)):
+for n in range(len(arr)): #stop words removal
     for element in arr[n]:
         if element in nltk_stopwords:
             pass
