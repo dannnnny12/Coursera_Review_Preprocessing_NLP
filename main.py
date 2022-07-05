@@ -51,30 +51,6 @@ for n in range(len(arr)): #stop words removal
 
             #stpwd_arr.append(element)
 #print(stpwd_arr)
-#print("positive words:"+str(pos))
-#print("negative words:"+str(neg))
+print("positive words:"+str(pos))
+print("negative words:"+str(neg))
 
-#Positive Reviews LDA Analysis
-id2word_pos = corpora.Dictionary([pos])
-#print(id2word)
-texts = pos
-corpus_pos = [id2word_pos.doc2bow(text.split()) for text in pos]
-#print(corpus)
-#print(corpus[:1][0][:30])
-num_topics = 10
-lda_model_pos = models.LdaModel(corpus=corpus_pos,id2word=id2word_pos,num_topics=num_topics)
-topic_list_pos = lda_model_pos.print_topics(10)
-print("10 positive topic distribution：\n")
-for topic in topic_list_pos:
-    print(topic)
-
-
-#Negative Reviews LDA Analysis
-id2word_neg = corpora.Dictionary([neg])
-#print(id2word)
-corpus_neg = [id2word_neg.doc2bow(text.split()) for text in neg]
-lda_model_neg = models.LdaModel(corpus=corpus_neg,id2word=id2word_neg,num_topics=num_topics)
-topic_list_neg = lda_model_neg.print_topics(10)
-print("10 negative topic distribution：\n")
-for topic in topic_list_neg:
-    print(topic)
