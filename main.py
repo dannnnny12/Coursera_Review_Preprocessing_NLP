@@ -53,4 +53,3 @@ for n in range(len(arr)): #stop words removal
 #print(stpwd_arr)
 print("positive words:"+str(pos))
 print("negative words:"+str(neg))
-
